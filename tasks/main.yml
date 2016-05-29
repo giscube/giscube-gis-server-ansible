@@ -1,0 +1,40 @@
+---
+
+# copy fcgi script
+- name: copy qgisserver applications to fcgis directory
+  copy:
+      src=data/fcgis/qgisserver/
+      dest={{ giscube_fcgis_path }}/qgisserver
+      owner=www-data
+      group=www-data
+      mode=0644
+
+# qgis apt source
+- name: copy sources.list file for qgis
+  copy:
+      src=etc/apt/sources.list.d/qgis.list
+      dest=/etc/apt/sources.list.d/qgis.list
+      owner=www-data
+      group=www-data
+      mode=0644
+  register: qgis_sources_list
+
+- name: import key for qgis
+  command: gpg --keyserver keyserver.ubuntu.com --recv D71472C4
+
+- name: add qgis key to apt
+  shell: "gpg --export --armor D71472C4 | sudo apt-key add -"
+  register: command_result
+  failed_when: "not command_result.stdout == 'OK'"
+
+# apt-get update
+- name: update sources
+  apt: update_cache=yes
+  when: qgis_sources_list.changed
+
+# apt-get install -y qgis-server
+- name: install qgis-server
+  apt: name={{ item }} state=latest
+  with_items:
+    - qgis-server
+  tags: packages
