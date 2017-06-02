@@ -22,7 +22,7 @@
   template:
         backup=no
         src=etc/apt/sources.list.d/qgis.list.j2
-        dest=/etc/apt/sources.list.d/qgis.list.j2
+        dest=/etc/apt/sources.list.d/qgis.list
         owner=root
         group=root
         mode=0644
