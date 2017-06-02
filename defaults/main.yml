@@ -1,0 +1,11 @@
+---
+
+
+qgisserver_workers: 8
+qgisserver_threads: 1
+
+
+qgisserver_owner: www-data
+qgisserver_group: www-data
+
+giscube_fcgis_path: /data/fcgis

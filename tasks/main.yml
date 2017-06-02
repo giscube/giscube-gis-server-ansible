@@ -1,29 +1,38 @@
 ---
 
+- file:
+    path: "{{ giscube_fcgis_path }}/qgisserver"
+    state: directory
+    owner: "{{ qgisserver_owner }}"
+    group: "{{ qgisserver_group }}"
+    mode: 0755
+
 # copy fcgi script
 - name: copy qgisserver applications to fcgis directory
-  copy:
-      src=data/fcgis/qgisserver/
-      dest={{ giscube_fcgis_path }}/qgisserver
-      owner=www-data
-      group=www-data
-      mode=0644
+  template:
+        backup=no
+        src=data/fcgis/qgisserver/uwsgi_ondemand.ini.j2
+        dest={{ giscube_fcgis_path }}/qgisserver/uwsgi_ondemand.ini
+        owner={{ qgisserver_owner }}
+        group={{ qgisserver_group }}
+        mode=0644
 
 # qgis apt source
-- name: copy sources.list file for qgis
-  copy:
-      src=etc/apt/sources.list.d/qgis.list
-      dest=/etc/apt/sources.list.d/qgis.list
-      owner=www-data
-      group=www-data
-      mode=0644
+- name: APT sources.list file for qgis
+  template:
+        backup=no
+        src=etc/apt/sources.list.d/qgis.list.j2
+        dest=/etc/apt/sources.list.d/qgis.list.j2
+        owner=root
+        group=root
+        mode=0644
   register: qgis_sources_list
 
 - name: import key for qgis
-  command: gpg --keyserver keyserver.ubuntu.com --recv D71472C4
+  command: gpg --keyserver keyserver.ubuntu.com --recv 073D307A618E5811
 
 - name: add qgis key to apt
-  shell: "gpg --export --armor D71472C4 | sudo apt-key add -"
+  shell: "gpg --export --armor 073D307A618E5811 | sudo apt-key add -"
   register: command_result
   failed_when: "not command_result.stdout == 'OK'"
 

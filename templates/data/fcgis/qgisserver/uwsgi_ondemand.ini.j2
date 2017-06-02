@@ -8,8 +8,8 @@ cgi-buffer-size = 32768
 # must not create the socket in ondemand mode
 # socket = %d/uwsgi.sock
 
-workers = 1
-threads = 16
+workers = {{ qgisserver_workers }}
+threads = {{ qgisserver_threads }}
 max-requests = 1000
 
 cheap
@@ -22,10 +22,11 @@ log-date = true
 logfile-chown = true
 env = QGIS_DEBUG=1
 env = QGIS_LOG_FILE=%d/qgisserver.log
+env = QGIS_AUTH_DB_DIR_PATH=/var/www
 
 # system
-uid = www-data
-gid = www-data
+uid = {{ qgisserver_owner }}
+gid = {{ qgisserver_group }}
 buffer-size = 32768
 master = true
 chmod = 660
