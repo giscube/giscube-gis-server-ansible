@@ -9,3 +9,5 @@ qgisserver_owner: www-data
 qgisserver_group: www-data
 
 giscube_fcgis_path: /data/fcgis
+
+giscube_qgisserver_app_path: giscube_qgisserver

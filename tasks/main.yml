@@ -1,7 +1,7 @@
 ---
 
 - file:
-    path: "{{ giscube_fcgis_path }}/qgisserver"
+    path: "{{ giscube_fcgis_path }}/{{ giscube_qgisserver_app_path }}"
     state: directory
     owner: "{{ qgisserver_owner }}"
     group: "{{ qgisserver_group }}"
@@ -12,7 +12,7 @@
   template:
         backup=no
         src=data/fcgis/qgisserver/uwsgi_ondemand.ini.j2
-        dest={{ giscube_fcgis_path }}/qgisserver/uwsgi_ondemand.ini
+        dest={{ giscube_fcgis_path }}/{{ giscube_qgisserver_app_path }}/uwsgi_ondemand.ini
         owner={{ qgisserver_owner }}
         group={{ qgisserver_group }}
         mode=0644
