@@ -20,8 +20,8 @@ die-on-idle = true
 logto = %d/log.log
 log-date = true
 logfile-chown = true
-env = QGIS_DEBUG=1
-env = QGIS_LOG_FILE=%d/qgisserver.log
+# env = QGIS_SERVER_LOG_LEVEL=1
+env = QGIS_SERVER_LOG_FILE=/data/fcgis/giscube_qgisserver/qgisserver.log
 env = QGIS_AUTH_DB_DIR_PATH=/var/www
 
 # system
@@ -30,7 +30,6 @@ gid = {{ qgisserver_group }}
 buffer-size = 32768
 master = true
 chmod = 660
-reload-os-env = true
 auto-procname = true
 no-orphans = true
 die-on-term = true
