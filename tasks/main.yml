@@ -29,10 +29,10 @@
   register: qgis_sources_list
 
 - name: import key for qgis
-  command: gpg --keyserver keyserver.ubuntu.com --recv 073D307A618E5811
+  command: gpg --keyserver keyserver.ubuntu.com --recv CAEB3DC3BDF7FB45
 
 - name: add qgis key to apt
-  shell: "gpg --export --armor 073D307A618E5811 | sudo apt-key add -"
+  shell: "gpg --export --armor CAEB3DC3BDF7FB45 | sudo apt-key add -"
   register: command_result
   failed_when: "not command_result.stdout == 'OK'"
 
