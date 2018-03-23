@@ -1,0 +1,15 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: manelclos
+  description: Giscube GIS Server install role
+  company: "Giscube"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.1
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  categories:
+    - system
