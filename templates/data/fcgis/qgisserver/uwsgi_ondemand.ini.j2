@@ -2,8 +2,7 @@
 procname-prefix-spaced=/fcgis/%c
 
 chdir = %d
-cgi = /=/usr/lib/cgi-bin/qgis_mapserv.fcgi
-cgi-buffer-size = 32768
+worker-exec=/usr/lib/cgi-bin/qgis_mapserv.fcgi
 
 # must not create the socket in ondemand mode
 # socket = %d/uwsgi.sock
@@ -12,6 +11,7 @@ workers = {{ qgisserver_workers }}
 threads = {{ qgisserver_threads }}
 max-requests = 1000
 
+# no workers on startup
 cheap
 idle = {{ qgisserver_idle }}
 die-on-idle = true
