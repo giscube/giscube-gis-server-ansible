@@ -26,6 +26,7 @@
         owner=root
         group=root
         mode=0644
+  when: qgis_apt
   register: qgis_sources_list
 
 # - name: import key for qgis
@@ -40,17 +41,20 @@
   apt_key:
     url: https://qgis.org/downloads/qgis-2017.gpg.key
     state: present
+  when: qgis_apt
   tags: qgis-key
 
 - name: Add an apt key by id from a keyserver
   apt_key:
     keyserver: keyserver.ubuntu.com
     id: CAEB3DC3BDF7FB45
+  when: qgis_apt
   tags: qgis-key
 
 # apt-get update
 - name: update sources
   apt: update_cache=yes
+  when: qgis_apt
   when: qgis_sources_list.changed
 
 # apt-get install -y qgis-server
