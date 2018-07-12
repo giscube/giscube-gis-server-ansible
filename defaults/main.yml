@@ -1,5 +1,6 @@
 ---
 
+qgis_apt: true
 
 qgisserver_workers: 8
 qgisserver_threads: 1
