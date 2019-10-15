@@ -28,13 +28,11 @@
         mode=0644
   register: qgis_sources_list
 
-- name: import key for qgis
-  command: gpg --keyserver keyserver.ubuntu.com --recv CAEB3DC3BDF7FB45
-
-- name: add qgis key to apt
-  shell: "gpg --export --armor CAEB3DC3BDF7FB45 | sudo apt-key add -"
-  register: command_result
-  failed_when: "not command_result.stdout == 'OK'"
+- name: add qgis key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 51F523511C7028C3
+  state: present
 
 # apt-get update
 - name: update sources
