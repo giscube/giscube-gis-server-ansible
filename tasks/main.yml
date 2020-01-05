@@ -32,7 +32,7 @@
   apt_key:
     keyserver: keyserver.ubuntu.com
     id: 51F523511C7028C3
-  state: present
+    state: present
 
 # apt-get update
 - name: update sources
