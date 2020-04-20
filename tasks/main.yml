@@ -48,7 +48,7 @@
 
 # apt-get install -y qgis-server
 - name: install qgis-server
-  apt: name={{ item }} state=latest
-  with_items:
-    - qgis-server
+  apt:
+    name: ['qgis-server']
+    state: latest
   tags: packages
