@@ -38,7 +38,7 @@
 - name: add qgis key
   apt_key:
     keyserver: keyserver.ubuntu.com
-    id: 51F523511C7028C3
+    id: F7E06F06199EF2F2
     state: present
 
 # apt-get update
